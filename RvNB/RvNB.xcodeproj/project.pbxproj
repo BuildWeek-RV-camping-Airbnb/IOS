@@ -16,6 +16,7 @@
 		A237AA84235E0ED400D7BC43 /* RvNBUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A237AA83235E0ED400D7BC43 /* RvNBUITests.swift */; };
 		E58D0D6A235E320B00F976E0 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58D0D69235E320B00F976E0 /* MainTabViewController.swift */; };
 		E58D0D6C235E39E400F976E0 /* TopStaysCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58D0D6B235E39E400F976E0 /* TopStaysCollectionViewController.swift */; };
+		E58D0D6E235E463900F976E0 /* TopStaysCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58D0D6D235E463900F976E0 /* TopStaysCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		A237AA85235E0ED400D7BC43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E58D0D69235E320B00F976E0 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		E58D0D6B235E39E400F976E0 /* TopStaysCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStaysCollectionViewController.swift; sourceTree = "<group>"; };
+		E58D0D6D235E463900F976E0 /* TopStaysCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopStaysCollectionViewCell.swift; path = "RvNB/View Controllers/TopStaysCollectionViewCell.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 		A237AA99235E126F00D7BC43 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E58D0D6D235E463900F976E0 /* TopStaysCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E58D0D6A235E320B00F976E0 /* MainTabViewController.swift in Sources */,
+				E58D0D6E235E463900F976E0 /* TopStaysCollectionViewCell.swift in Sources */,
 				A237AA62235E0ED100D7BC43 /* AppDelegate.swift in Sources */,
 				A237AA64235E0ED100D7BC43 /* SceneDelegate.swift in Sources */,
 				E58D0D6C235E39E400F976E0 /* TopStaysCollectionViewController.swift in Sources */,

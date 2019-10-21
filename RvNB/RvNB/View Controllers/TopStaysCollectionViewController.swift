@@ -11,7 +11,7 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 
-class TopStaysCollectionViewController: UICollectionViewController {
+class TopStaysCollectionViewController: UICollectionViewController, UICollectionViewFlowLayout {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +37,8 @@ class TopStaysCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
     
+    
+    
     func setUpCollectionView() {
         if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.scrollDirection = .horizontal
@@ -61,7 +63,7 @@ class TopStaysCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return 10
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
