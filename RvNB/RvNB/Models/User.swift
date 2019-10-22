@@ -8,11 +8,12 @@
 
 import Foundation
 
+enum UserCodingKeys: String, CodingKey {
+    case firstName = "first_name"
+    case lastName = "last_name"
+}
+
 struct UserRepresentation: Codable {
-    enum CodingKeys: String, CodingKey {
-        case firstName = "first_name"
-        case lastName = "last_name"
-    }
     
     var id: Int?
     var firstName: String?
