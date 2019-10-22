@@ -35,4 +35,35 @@ class UserController {
         
         return newUserRepresentation
     }
+    
+    func put(userRep: UserRepresentation, completion: @escaping (NetworkError?) -> Void) {
+        let requestURL = baseURL.appendingPathComponent("\(userRep.id)").appendingPathExtension("json")
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.put.rawValue
+        
+        URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                NSLog("Error PUTting data: \(error)")
+                completion(.otherError)
+                return
+            }
+            
+            guard let data = data else {
+                NSLog("Error unwrapping data on line \(#line) in \(#file)")
+                completion(.badData)
+                return
+            }
+            
+            do {
+                request.httpBody = try JSONEncoder().encode(data)
+            } catch {
+                NSLog("Error encoding UserRepresentation data on line \(#line) in \(#file): \(error)")
+                completion(.otherError)
+                return
+            }
+            
+            completion(.none)
+        }.resume()
+    }
 }
