@@ -31,13 +31,13 @@ class UserController {
     func createUser(firstName: String?, lastName: String?, email: String?, username: String, password: String, owner: Bool, avatar: URL) -> UserRepresentation {
         let id: Int = usersArray.count + 1
         
-        let newUserRepresentation = UserRepresentation(id: id, firstName: firstName, lastName: lastName, email: email, username: username, password: password, owner: owner, avatar: avatar)
+        let newUserRepresentation = UserRepresentation(firstName: firstName, lastName: lastName, email: email, username: username, password: password, owner: owner, avatar: avatar)
         
         return newUserRepresentation
     }
     
     func put(userRep: UserRepresentation, completion: @escaping (NetworkError?) -> Void) {
-        let requestURL = baseURL.appendingPathComponent("\(userRep.id)").appendingPathExtension("json")
+        let requestURL = baseURL.appendingPathExtension("json")
         
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.put.rawValue
