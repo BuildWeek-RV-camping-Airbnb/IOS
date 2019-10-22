@@ -11,7 +11,7 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 
-class TopStaysCollectionViewController: UICollectionViewController, UICollectionViewFlowLayout {
+class TopStaysCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

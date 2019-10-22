@@ -10,10 +10,13 @@ import UIKit
 
 class MainTabViewController: UITabBarController {
     
+
     
     @IBOutlet weak var rvnbImage: UIImageView!
     @IBOutlet weak var topRatedStays: UICollectionView!
     @IBOutlet weak var listOfStays: UICollectionView!
+    
+    
     
     
 
@@ -23,6 +26,9 @@ class MainTabViewController: UITabBarController {
         // Do any additional setup after loading the view.
     }
     
+    private struct StoryBoard {
+        static let CellIdentifier = "Cell"
+    }
 
     /*
     // MARK: - Navigation
@@ -34,4 +40,26 @@ class MainTabViewController: UITabBarController {
     }
     */
 
+}
+
+extension MainTabViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return (collectionView.cellForItem(at: indexPath) ?? nil)!
+    }
+    
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemIndexPath indexPath: NSIndexPath) ->  UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StoryBoard.CellIdentifier, for: indexPath as IndexPath)
+        
+        return cell
+    }
+    
 }
