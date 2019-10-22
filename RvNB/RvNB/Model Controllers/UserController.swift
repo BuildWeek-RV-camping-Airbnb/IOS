@@ -14,6 +14,7 @@ enum NetworkError: Error {
     case otherError
     case badData
     case noDecode
+    case noEncode
 }
 
 enum HTTPMethod: String {
