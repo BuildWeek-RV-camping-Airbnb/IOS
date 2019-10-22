@@ -14,6 +14,7 @@ enum NetworkError: Error {
     case otherError
     case badData
     case noDecode
+    case noEncode
 }
 
 enum HTTPMethod: String {
@@ -24,16 +25,45 @@ enum HTTPMethod: String {
 }
 
 class UserController {
-    let baseURL = URL(string: "https://rvnb-mock-database.firebaseio.com/")!
+    let baseURL = URL(string: "https://bw-rvnb.herokuapp.com")!
     
     let usersArray: [UserRepresentation] = []
-    // MARK: - Networking Methods
+    
     func createUser(firstName: String?, lastName: String?, email: String?, username: String, password: String, owner: Bool, avatar: URL) -> UserRepresentation {
-        let id: Int = usersArray.count + 1
         
         let newUserRepresentation = UserRepresentation(firstName: firstName, lastName: lastName, email: email, username: username, password: password, owner: owner, avatar: avatar)
         
         return newUserRepresentation
+    }
+    // MARK: - Networking Methods-USERS
+    func postNewUser(userRep: UserRepresentation, completion: @escaping (NetworkError?) -> Void) {
+        let requestURL = baseURL.appendingPathComponent("api").appendingPathComponent("users")
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.post.rawValue
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(userRep)
+        } catch {
+            NSLog("Error encoding new user for POST to backend on line \(#line) in \(#file): \(error)")
+            completion(.noEncode)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { (_, response, error) in
+            if let response = response as? HTTPURLResponse {
+                if response.statusCode != 200 {
+                    NSLog("Error POSTing new user to backend, Response \(response.statusCode)")
+                    completion(.otherError)
+                    return
+                }
+            }
+            
+            if let error = error {
+                NSLog("Error POSTing new user to backend on line \(#line) in \(#file): \(error)")
+                completion(.otherError)
+                return
+            }
+        }.resume()
     }
     
     func put(userRep: UserRepresentation, completion: @escaping (NetworkError?) -> Void) {
