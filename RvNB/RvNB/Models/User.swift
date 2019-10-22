@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct UserRepresentation {
+struct UserRepresentation: Codable {
     enum CodingKeys: String, CodingKey {
         case firstName = "first_name"
         case lastName = "last_name"
