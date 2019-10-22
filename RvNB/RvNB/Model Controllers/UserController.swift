@@ -24,12 +24,11 @@ enum HTTPMethod: String {
 }
 
 class UserController {
-    let baseURL = URL(string: "https://rvnb-mock-database.firebaseio.com/")!
+    let baseURL = URL(string: "https://bw-rvnb.herokuapp.com")!
     
     let usersArray: [UserRepresentation] = []
-    // MARK: - Networking Methods
+    
     func createUser(firstName: String?, lastName: String?, email: String?, username: String, password: String, owner: Bool, avatar: URL) -> UserRepresentation {
-        let id: Int = usersArray.count + 1
         
         let newUserRepresentation = UserRepresentation(firstName: firstName, lastName: lastName, email: email, username: username, password: password, owner: owner, avatar: avatar)
         
