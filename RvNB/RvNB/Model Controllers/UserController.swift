@@ -40,8 +40,42 @@ class UserController {
         postNewUser(userRep: newUserRepresentation)
         return newUserRepresentation
     }
-    // MARK: - Networking Methods-USERS
-    func postNewUser(userRep: UserRepresentation, completion: @escaping (NetworkError?) -> Void) {
+    // MARK: - Networking-GET User
+    func fetchUserIDFromServer(completion: @escaping (NetworkError?) -> Void = { _ in }) {
+        let requestURL = baseURL.appendingPathComponent("api").appendingPathComponent("users")
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.get.rawValue
+        
+        URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                NSLog("Error GETting users from backend on line \(#line) in \(#file): \(error)")
+                completion(.otherError)
+                return
+            }
+            
+            guard let data = data else {
+                NSLog("Error unwrapping data from GET request on line \(#line) in \(#file)")
+                completion(.badData)
+                return
+            }
+            
+            do {
+                self.usersArray = try JSONDecoder().decode([UserRepresentation].self, from: data)
+            } catch {
+                NSLog("Error decoding usersArray from data returned from backend on line \(#line) in \(#file): \(error)")
+                completion(.noDecode)
+            }
+            
+            completion(.none)
+        }.resume()
+    }
+    
+    func getUser(email: String, completion: @escaping (NetworkError?) -> Void = { _ in }) {
+        
+    }
+    
+    // MARK: - Networking-POST User
+    func postNewUser(userRep: UserRepresentation, completion: @escaping (NetworkError?) -> Void = { _ in }) {
         let requestURL = baseURL.appendingPathComponent("api").appendingPathComponent("users")
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.post.rawValue
@@ -71,6 +105,7 @@ class UserController {
         }.resume()
     }
     
+    // MARK: - Networking-PUT User
     func put(userRep: UserRepresentation, completion: @escaping (NetworkError?) -> Void) {
         let requestURL = baseURL.appendingPathExtension("json")
         
