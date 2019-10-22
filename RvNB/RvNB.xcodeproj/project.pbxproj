@@ -21,6 +21,7 @@
 		A237AB27235E5DFC00D7BC43 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A237AB26235E5DFC00D7BC43 /* Main.storyboard */; };
 		A237AB29235E5E0500D7BC43 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A237AB28235E5E0500D7BC43 /* MainTabViewController.swift */; };
 		A237AB2B235E5E0D00D7BC43 /* TopStaysCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A237AB2A235E5E0D00D7BC43 /* TopStaysCollectionViewController.swift */; };
+		A237AB2D235E803500D7BC43 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A237AB2C235E803500D7BC43 /* UserController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		A237AB26235E5DFC00D7BC43 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A237AB28235E5E0500D7BC43 /* MainTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		A237AB2A235E5E0D00D7BC43 /* TopStaysCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopStaysCollectionViewController.swift; sourceTree = "<group>"; };
+		A237AB2C235E803500D7BC43 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 		A237AA98235E125900D7BC43 /* Model Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A237AB2C235E803500D7BC43 /* UserController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A237AB2D235E803500D7BC43 /* UserController.swift in Sources */,
 				A237AB25235E5DE800D7BC43 /* TopStaysCollectionViewCell.swift in Sources */,
 				A237AB19235E491700D7BC43 /* PropertyDetailViewController.swift in Sources */,
 				A237AA66235E0ED100D7BC43 /* ViewController.swift in Sources */,
