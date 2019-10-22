@@ -7,6 +7,7 @@
 //
 import Foundation
 
+// MARK: - Enums
 enum NetworkError: Error {
     case noAuth
     case badAuth
@@ -26,7 +27,7 @@ class UserController {
     let baseURL = URL(string: "https://rvnb-mock-database.firebaseio.com/")!
     
     let usersArray: [UserRepresentation] = []
-    
+    // MARK: - Networking Methods
     func createUser(firstName: String?, lastName: String?, email: String?, username: String, password: String, owner: Bool, avatar: URL) -> UserRepresentation {
         let id: Int = usersArray.count + 1
         
