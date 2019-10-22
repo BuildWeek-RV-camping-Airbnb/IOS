@@ -23,6 +23,8 @@
 		A237AB2D235E803500D7BC43 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A237AB2C235E803500D7BC43 /* UserController.swift */; };
 		A237AB2F235F8F4600D7BC43 /* LandOwnerDashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A237AB2E235F8F4600D7BC43 /* LandOwnerDashboard.storyboard */; };
 		A284392A235FC16B00368440 /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2843929235FC16B00368440 /* Bearer.swift */; };
+		E552637D235FBAB7004B4C47 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E552637C235FBAB7004B4C47 /* LoginViewController.swift */; };
+		E580B381235F73F1007F5ADF /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E580B380235F73F1007F5ADF /* Login.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		A237AB2C235E803500D7BC43 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		A237AB2E235F8F4600D7BC43 /* LandOwnerDashboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LandOwnerDashboard.storyboard; sourceTree = "<group>"; };
 		A2843929235FC16B00368440 /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
+		E552637C235FBAB7004B4C47 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E580B380235F73F1007F5ADF /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +155,7 @@
 			children = (
 				A237AA6C235E0ED400D7BC43 /* LaunchScreen.storyboard */,
 				A237AB26235E5DFC00D7BC43 /* Main.storyboard */,
+				E580B380235F73F1007F5ADF /* Login.storyboard */,
 				A237AB16235E48A200D7BC43 /* PropertyDetail.storyboard */,
 				A237AB2E235F8F4600D7BC43 /* LandOwnerDashboard.storyboard */,
 			);
@@ -163,6 +168,7 @@
 				A237AB28235E5E0500D7BC43 /* MainTabViewController.swift */,
 				A237AA65235E0ED100D7BC43 /* ViewController.swift */,
 				A237AB18235E491700D7BC43 /* PropertyDetailViewController.swift */,
+				E552637C235FBAB7004B4C47 /* LoginViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -301,6 +307,7 @@
 				A237AA6B235E0ED400D7BC43 /* Assets.xcassets in Resources */,
 				A237AB2F235F8F4600D7BC43 /* LandOwnerDashboard.storyboard in Resources */,
 				A237AB27235E5DFC00D7BC43 /* Main.storyboard in Resources */,
+				E580B381235F73F1007F5ADF /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E552637D235FBAB7004B4C47 /* LoginViewController.swift in Sources */,
 				A237AB2D235E803500D7BC43 /* UserController.swift in Sources */,
 				A237AB25235E5DE800D7BC43 /* TopStaysCollectionViewCell.swift in Sources */,
 				A284392A235FC16B00368440 /* Bearer.swift in Sources */,
@@ -499,6 +507,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = RvNB/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -516,6 +525,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = RvNB/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
