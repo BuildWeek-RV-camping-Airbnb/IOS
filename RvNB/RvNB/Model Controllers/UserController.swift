@@ -35,6 +35,36 @@ class UserController {
         
         return newUserRepresentation
     }
+    // MARK: - Networking Methods-USERS
+    func postNewUser(userRep: UserRepresentation, completion: @escaping (NetworkError?) -> Void) {
+        let requestURL = baseURL.appendingPathComponent("api").appendingPathComponent("users")
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.post.rawValue
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(userRep)
+        } catch {
+            NSLog("Error encoding new user for POST to backend on line \(#line) in \(#file): \(error)")
+            completion(.noEncode)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { (_, response, error) in
+            if let response = response as? HTTPURLResponse {
+                if response.statusCode != 200 {
+                    NSLog("Error POSTing new user to backend, Response \(response.statusCode)")
+                    completion(.otherError)
+                    return
+                }
+            }
+            
+            if let error = error {
+                NSLog("Error POSTing new user to backend on line \(#line) in \(#file): \(error)")
+                completion(.otherError)
+                return
+            }
+        }.resume()
+    }
     
     func put(userRep: UserRepresentation, completion: @escaping (NetworkError?) -> Void) {
         let requestURL = baseURL.appendingPathExtension("json")
