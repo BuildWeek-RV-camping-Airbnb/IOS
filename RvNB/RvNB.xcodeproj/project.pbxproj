@@ -22,6 +22,7 @@
 		A237AB29235E5E0500D7BC43 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A237AB28235E5E0500D7BC43 /* MainTabViewController.swift */; };
 		A237AB2D235E803500D7BC43 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A237AB2C235E803500D7BC43 /* UserController.swift */; };
 		A237AB2F235F8F4600D7BC43 /* LandOwnerDashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A237AB2E235F8F4600D7BC43 /* LandOwnerDashboard.storyboard */; };
+		A284392A235FC16B00368440 /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2843929235FC16B00368440 /* Bearer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		A237AB28235E5E0500D7BC43 /* MainTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		A237AB2C235E803500D7BC43 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		A237AB2E235F8F4600D7BC43 /* LandOwnerDashboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LandOwnerDashboard.storyboard; sourceTree = "<group>"; };
+		A2843929235FC16B00368440 /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				A237AB1A235E493300D7BC43 /* User.swift */,
+				A2843929235FC16B00368440 /* Bearer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 			files = (
 				A237AB2D235E803500D7BC43 /* UserController.swift in Sources */,
 				A237AB25235E5DE800D7BC43 /* TopStaysCollectionViewCell.swift in Sources */,
+				A284392A235FC16B00368440 /* Bearer.swift in Sources */,
 				A237AB19235E491700D7BC43 /* PropertyDetailViewController.swift in Sources */,
 				A237AA66235E0ED100D7BC43 /* ViewController.swift in Sources */,
 				A237AA62235E0ED100D7BC43 /* AppDelegate.swift in Sources */,
