@@ -158,7 +158,6 @@
 			isa = PBXGroup;
 			children = (
 				A237AB28235E5E0500D7BC43 /* MainTabViewController.swift */,
-				A237AB2A235E5E0D00D7BC43 /* TopStaysCollectionViewController.swift */,
 				A237AA65235E0ED100D7BC43 /* ViewController.swift */,
 				A237AB18235E491700D7BC43 /* PropertyDetailViewController.swift */,
 			);
@@ -325,7 +324,6 @@
 				A237AB25235E5DE800D7BC43 /* TopStaysCollectionViewCell.swift in Sources */,
 				A237AB19235E491700D7BC43 /* PropertyDetailViewController.swift in Sources */,
 				A237AA66235E0ED100D7BC43 /* ViewController.swift in Sources */,
-				A237AB2B235E5E0D00D7BC43 /* TopStaysCollectionViewController.swift in Sources */,
 				A237AA62235E0ED100D7BC43 /* AppDelegate.swift in Sources */,
 				A237AB1B235E493300D7BC43 /* User.swift in Sources */,
 				A237AB29235E5E0500D7BC43 /* MainTabViewController.swift in Sources */,
