@@ -12,6 +12,8 @@ class MainTabViewController: UIViewController {
     
 
 //    MARK: OUTLETS
+    
+    @IBOutlet weak var rvnbSearchBar: UISearchBar!
     @IBOutlet weak var rvnbImage: UIImageView!
     @IBOutlet weak var topRatedStays: UICollectionView!
     @IBOutlet weak var listOfStays: UICollectionView!
