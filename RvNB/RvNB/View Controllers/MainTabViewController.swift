@@ -10,6 +10,7 @@ import UIKit
 
 class MainTabViewController: UIViewController {
     
+    var bearer: Bearer?
 
 //    MARK: OUTLETS
     
@@ -22,6 +23,16 @@ class MainTabViewController: UIViewController {
     
     
 // MARK: View Life Cycle
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        transitions to login view if conditions require
+        
+        if bearer == nil {
+            performSegue(withIdentifier: "LoginTestSegue", sender: self)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,7 +61,10 @@ extension MainTabViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return (collectionView.cellForItem(at: indexPath) ?? nil)!
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? TopStaysCollectionViewCell else { return UICollectionViewCell() }
+        
+        return cell
+        
     }
     
     
