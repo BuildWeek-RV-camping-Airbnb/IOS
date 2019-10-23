@@ -8,10 +8,10 @@
 
 import UIKit
 
-class MainTabViewController: UITabBarController {
+class MainTabViewController: UIViewController {
     
 
-    
+//    MARK: OUTLETS
     @IBOutlet weak var rvnbImage: UIImageView!
     @IBOutlet weak var topRatedStays: UICollectionView!
     @IBOutlet weak var listOfStays: UICollectionView!
@@ -19,7 +19,7 @@ class MainTabViewController: UITabBarController {
     
     
     
-
+// MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 

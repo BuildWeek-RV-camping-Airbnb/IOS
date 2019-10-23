@@ -136,11 +136,11 @@
                                             <action selector="signInButtonTapped:" destination="2rE-RY-lag" eventType="touchUpInside" id="dsA-WP-pEb"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="jNB-BS-BhK">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="jNB-BS-BhK">
                                         <rect key="frame" x="145" y="827" width="124" height="27"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have Account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MsQ-Ot-P7i">
-                                                <rect key="frame" x="0.0" y="0.0" width="82" height="27"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="55" height="27"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -193,6 +193,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="265-Kw-aHB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="oAk-io-0UH"/>
                     <connections>
                         <outlet property="logoTopConstraint" destination="61j-AG-qoI" id="WCw-RU-uP4"/>
                         <outlet property="signInButton" destination="pJQ-5Q-z1Z" id="z83-3F-MZS"/>
@@ -202,7 +203,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lvk-eh-Lns" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-75.362318840579718" y="82.366071428571431"/>
+            <point key="canvasLocation" x="834.78260869565224" y="82.366071428571431"/>
         </scene>
     </scenes>
     <resources>
