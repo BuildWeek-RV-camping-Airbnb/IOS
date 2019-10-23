@@ -1,5 +1,5 @@
 //
-//  UserController.swift
+//  APIController.swift
 //  RvNB
 //
 //  Created by Alex Shillingford on 10/21/19.
@@ -28,7 +28,7 @@ enum HTTPMethod: String {
     case delete = "DELETE"
 }
 
-class UserController {
+class APIController {
     let baseURL = URL(string: "https://bw-rvnb.herokuapp.com")!
     var bearer: Bearer?
     var usersArray: [UserRepresentation] = []
