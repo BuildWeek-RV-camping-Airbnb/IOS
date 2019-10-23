@@ -29,48 +29,75 @@ enum HTTPMethod: String {
     case delete = "DELETE"
 }
 
-class UserController {
+class APIController {
     let baseURL = URL(string: "https://bw-rvnb.herokuapp.com")!
+    var bearer: Bearer?
+    var user: UserRepresentation?
     
-    var usersArray: [UserRepresentation] = []
-    
-    func createUser(firstName: String?, lastName: String?, email: String?, username: String, password: String, owner: Bool, avatar: URL) -> UserRepresentation {
+    func createUser(firstName: String?, lastName: String?, email: String?, username: String, password: String, owner: Bool, avatar: URL?) -> UserRepresentation {
         
         let newUserRepresentation = UserRepresentation(firstName: firstName, lastName: lastName, email: email, username: username, password: password, owner: owner, avatar: avatar)
         
         postNewUser(userRep: newUserRepresentation)
         return newUserRepresentation
     }
-    // MARK: - Networking-GET User
-    func fetchUserIDFromServer(completion: @escaping (NetworkError?) -> Void = { _ in }) {
-        let requestURL = baseURL.appendingPathComponent("api").appendingPathComponent("users")
+    
+    // MARK: - Networking-Login
+    func signUpLogIn(firstName: String?, lastName: String?, email: String?, username: String, password: String, owner: Bool, avatar: URL?, completion: @escaping (NetworkError?) -> Void = { _ in }) {
+        let requestURL = baseURL
+            .appendingPathComponent("api")
+            .appendingPathComponent("users")
+            .appendingPathComponent("login")
         var request = URLRequest(url: requestURL)
-        request.httpMethod = HTTPMethod.get.rawValue
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-type")
+        let newUserRep = createUser(firstName: firstName, lastName: lastName, email: email, username: username, password: password, owner: owner, avatar: avatar)
+        self.user = newUserRep
         
-        URLSession.shared.dataTask(with: request) { (data, _, error) in
+        let userParameters: [String : String] = [
+            "email" : email!,
+            "password" : password
+        ]
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(userParameters)
+        } catch {
+            NSLog("Error with SignUp/Login on line \(#line) in \(#file): \(error)")
+            completion(.noEncode)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let response = response as? HTTPURLResponse,
+                response.statusCode != 200 {
+                NSLog("\(NSError(domain: "", code: response.statusCode, userInfo: nil))")
+                completion(.badAuth)
+                return
+            }
+            
             if let error = error {
-                NSLog("Error GETting users from backend on line \(#line) in \(#file): \(error)")
-                completion(.otherError)
+                NSLog("Error with data task request on line \(#line) in \(#file): \(error)")
+                completion(.noAuth)
                 return
             }
             
             guard let data = data else {
-                NSLog("Error unwrapping data from GET request on line \(#line) in \(#file)")
+                NSLog("Error with getting back data from backend during SignUpLogIn POST request on line \(#line) in \(#file)")
                 completion(.badData)
                 return
             }
             
             do {
-                self.usersArray = try JSONDecoder().decode([UserRepresentation].self, from: data)
+                self.bearer = try JSONDecoder().decode(Bearer.self, from: data)
+                self.user?.id = try JSONDecoder().decode(Int.self, from: data)
             } catch {
-                NSLog("Error decoding usersArray from data returned from backend on line \(#line) in \(#file): \(error)")
-                completion(.noDecode)
+                NSLog("Error receiving token OR User ID from backend: \(error)")
             }
-            
-            completion(.none)
+            completion(nil)
         }.resume()
     }
     
+    // MARK: - Networking-GET User
     func getUser(email: String, completion: @escaping (NetworkError?) -> Void = { _ in }) {
         
     }
