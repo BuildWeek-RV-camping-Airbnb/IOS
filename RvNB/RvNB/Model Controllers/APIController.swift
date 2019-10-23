@@ -31,10 +31,10 @@ enum HTTPMethod: String {
 
 class APIController {
     let baseURL = URL(string: "https://bw-rvnb.herokuapp.com")!
+    var bearer: Bearer?
+    var user: UserRepresentation?
     
-    var usersArray: [UserRepresentation] = []
-    
-    func createUser(firstName: String?, lastName: String?, email: String?, username: String, password: String, owner: Bool, avatar: URL) -> UserRepresentation {
+    func createUser(firstName: String?, lastName: String?, email: String?, username: String, password: String, owner: Bool, avatar: URL?) -> UserRepresentation {
         
         let newUserRepresentation = UserRepresentation(firstName: firstName, lastName: lastName, email: email, username: username, password: password, owner: owner, avatar: avatar)
         
