@@ -1,10 +1,11 @@
 //
-//  UserController.swift
+//  APIController.swift
 //  RvNB
 //
-//  Created by Alex Shillingford on 10/21/19.
+//  Created by Alex Shillingford on 10/23/19.
 //  Copyright © 2019 Alex Shillingford. All rights reserved.
 //
+
 import Foundation
 
 // MARK: - Enums
