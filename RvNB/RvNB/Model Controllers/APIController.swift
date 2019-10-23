@@ -29,7 +29,7 @@ enum HTTPMethod: String {
     case delete = "DELETE"
 }
 
-class UserController {
+class APIController {
     let baseURL = URL(string: "https://bw-rvnb.herokuapp.com")!
     
     var usersArray: [UserRepresentation] = []
@@ -42,35 +42,6 @@ class UserController {
         return newUserRepresentation
     }
     // MARK: - Networking-GET User
-    func fetchUserIDFromServer(completion: @escaping (NetworkError?) -> Void = { _ in }) {
-        let requestURL = baseURL.appendingPathComponent("api").appendingPathComponent("users")
-        var request = URLRequest(url: requestURL)
-        request.httpMethod = HTTPMethod.get.rawValue
-        
-        URLSession.shared.dataTask(with: request) { (data, _, error) in
-            if let error = error {
-                NSLog("Error GETting users from backend on line \(#line) in \(#file): \(error)")
-                completion(.otherError)
-                return
-            }
-            
-            guard let data = data else {
-                NSLog("Error unwrapping data from GET request on line \(#line) in \(#file)")
-                completion(.badData)
-                return
-            }
-            
-            do {
-                self.usersArray = try JSONDecoder().decode([UserRepresentation].self, from: data)
-            } catch {
-                NSLog("Error decoding usersArray from data returned from backend on line \(#line) in \(#file): \(error)")
-                completion(.noDecode)
-            }
-            
-            completion(.none)
-        }.resume()
-    }
-    
     func getUser(email: String, completion: @escaping (NetworkError?) -> Void = { _ in }) {
         
     }
