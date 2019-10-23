@@ -10,9 +10,16 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-//    MARK: Outlets
-    @IBOutlet weak var topConstraintHeight: NSLayoutConstraint!
+    var userController: UserController?
+    var bearer: Bearer?
     
+    
+//    MARK: Outlets
+  
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var signInPopUpView: UIView!
+    
+    @IBOutlet weak var topConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var logoTopConstraint: NSLayoutConstraint!
     
 //    MARK: ACTIONS
@@ -24,6 +31,13 @@ class LoginViewController: UIViewController {
         print("clicked")
         
     }
+    
+//    @IBAction func signupButtonTapped(_ sender: Any) {
+//        
+//        guard let usern
+//        
+//    }
+    
     
     
     @IBAction func ShowSignInPop(_ sender: Any) {
