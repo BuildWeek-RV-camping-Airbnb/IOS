@@ -13,6 +13,5 @@ class TopStaysCollectionViewCell: UICollectionViewCell {
 //    features
 //    MARK: - private
     @IBOutlet weak var featuredImageView: UIImageView!
-    
     @IBOutlet weak var featuredImageLabel: UILabel!
 }
