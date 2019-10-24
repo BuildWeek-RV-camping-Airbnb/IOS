@@ -12,7 +12,7 @@ class MainTabViewController: UIViewController {
     
     var bearer: Bearer?
 
-//    MARK: OUTLETS
+//    MARK: Outlets
     
     @IBOutlet weak var rvnbSearchBar: UISearchBar!
     @IBOutlet weak var rvnbImage: UIImageView!
@@ -27,7 +27,6 @@ class MainTabViewController: UIViewController {
         super.viewDidAppear(animated)
         
 //        transitions to login view if conditions require
-        
         if bearer == nil {
             performSegue(withIdentifier: "LoginTestSegue", sender: self)
         }
@@ -73,7 +72,7 @@ extension MainTabViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemIndexPath indexPath: NSIndexPath) ->  UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StoryBoard.CellIdentifier, for: indexPath as IndexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath)
         
         return cell
     }

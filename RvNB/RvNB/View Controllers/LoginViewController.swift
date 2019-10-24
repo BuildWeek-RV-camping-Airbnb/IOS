@@ -2,65 +2,98 @@
 //  LoginViewController.swift
 //  RvNB
 //
-//  Created by Lambda_School_Loaner_167 on 10/22/19.
+//  Created by Lambda_School_Loaner_167 on 10/23/19.
 //  Copyright © 2019 Alex Shillingford. All rights reserved.
 //
 
 import UIKit
 
+enum LoginType {
+    
+    case signUp
+    case signIn
+}
+
+struct User: Codable {
+    let email: String
+    let password: String
+}
+
+enum Category: String, Codable {
+    case Renter
+    case Owner
+}
 class LoginViewController: UIViewController {
     
-    var userController: UserController?
-    var bearer: Bearer?
-    
-    
 //    MARK: Outlets
-  
+    
+    @IBOutlet weak var logoimageView: UIImageView!
+    @IBOutlet weak var loginSegmentedController: UISegmentedControl!
     @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var signInPopUpView: UIView!
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var firstNameTextField: UITextField!
+    @IBOutlet weak var lastNameTextField: UITextField!
+    @IBOutlet weak var areYouCateogorytextField: UITextField!
     
-    @IBOutlet weak var topConstraintHeight: NSLayoutConstraint!
-    @IBOutlet weak var logoTopConstraint: NSLayoutConstraint!
+//    MARK: - Properties
     
-//    MARK: ACTIONS
-    @IBAction func hideSigninPop(_ sender: UIButton) {
-        topConstraintHeight.constant = 800;
-        logoTopConstraint.constant = 187;
-        
-        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: .curveEaseOut, animations: { self.view.layoutIfNeeded() }, completion: nil)
-        print("clicked")
-        
-    }
+    var apiController: APIController?
+    var loginType = LoginType.signUp
+    let cateogorytext:  UIPickerView = UIPickerView()
+    let inputChoices: [Category] = [.Owner, .Renter]
     
-//    @IBAction func signupButtonTapped(_ sender: Any) {
-//        
-//        guard let usern
-//        
-//    }
-    
-    
-    
-    @IBAction func ShowSignInPop(_ sender: Any) {
-        
-    topConstraintHeight.constant = 0;
-        logoTopConstraint.constant = 100;
-        
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: .curveEaseOut, animations: { self.view.layoutIfNeeded() }, completion: nil)
-        print("clicked")
-    }
-    
-    
-    
-    // MARK: View Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        areYouCateogorytextField.inputView = cateogorytext
+        cateogorytext.delegate = self as? UIPickerViewDelegate
+        cateogorytext.dataSource = self as? UIPickerViewDataSource
+        
+        
 
         // Do any additional setup after loading the view.
-        
-        topConstraintHeight.constant = 800;
-        logoTopConstraint.constant = 187;
     }
+    
+//    MARK: - Actions
+    
+    @IBAction func signInSegChanged(_ sender: Any) {
+        
+        if (sender as AnyObject).selectedSegmentIndex == 0 {
+            loginType = .signUp
+            signInButton.setTitle("Sign Up", for: .normal)
+            firstNameTextField.isHidden = false
+            lastNameTextField.isHidden = false
+            areYouCateogorytextField.isHidden = false
+            usernameTextField.isHidden = false
+        } else {
+            loginType = .signIn
+            signInButton.setTitle("Sign In", for: .normal)
+            firstNameTextField.isHidden = true
+            lastNameTextField.isHidden = true
+            areYouCateogorytextField.isHidden = true
+            usernameTextField.isHidden = true
+        }
+        
+    }
+    
+    @IBAction func signUpButtonTapped(_ sender: Any) {
+        
+        guard let email = emailTextField.text,
+            let password = passwordTextField.text,
+            let categoryText = areYouCateogorytextField.text,
+            let category = Category(rawValue: categoryText),
+        email != "",
+            !password.isEmpty else { return }
+        
+        let user = User(email: email, password: password)
+        
+        
+    }
+    
+    
+    
     
 
     /*
@@ -72,5 +105,28 @@ class LoginViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
+
+extension LoginViewController: UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return inputChoices.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return inputChoices[row].rawValue
+    }
+    
+}
+
+extension LoginViewController: UIPickerViewDelegate {
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        areYouCateogorytextField.text = inputChoices[row].rawValue
+    }
+}
+
