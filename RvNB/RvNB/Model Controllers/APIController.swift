@@ -197,4 +197,35 @@ class APIController {
         }.resume()
     }
     
+    // MARK: - Network-GET all Amenities
+    func getAllAmenities(completion: @escaping (NetworkError?) -> Void = { _ in }) {
+        guard let bearer = bearer else { return }
+        let requestURL = baseURL.appendingPathComponent("api").appendingPathComponent("amenities")
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.get.rawValue
+        request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                NSLog("Error GETting amenities from backend on line \(#line) in \(#file): \(error)")
+                completion(.getRequestError)
+                return
+            }
+            
+            guard let data = data else {
+                NSLog("Error unwrapping amenity data on line \(#line) in \(#file)")
+                completion(.badData)
+                return
+            }
+            
+            do {
+                self.amenities = try JSONDecoder().decode([AmenityRepresentation].self, from: data)
+            } catch {
+                NSLog("Error decoding amenities on line \(#line) in \(#file): \(error)")
+                completion(.noDecode)
+                return
+            }
+            completion(nil)
+        }.resume()
+    }
 }
