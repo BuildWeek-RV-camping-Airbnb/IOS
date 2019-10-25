@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hyX-wc-JC7">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Map View Controller-->
+        <scene sceneID="nbN-D0-zkR">
+            <objects>
+                <viewController id="hyX-wc-JC7" customClass="MapViewController" customModule="RvNB" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5S6-gd-mgo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oJi-vc-Bw6">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="sJB-P1-O1r" appends="YES" id="VZw-Ov-Bhx"/>
+                                </connections>
+                            </mapView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="wop-AH-e2K">
+                                <rect key="frame" x="0.0" y="89" width="414" height="40"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="oJi-vc-Bw6" secondAttribute="bottom" id="AGh-pr-D3D"/>
+                            <constraint firstItem="6t9-uY-X6E" firstAttribute="bottom" secondItem="wop-AH-e2K" secondAttribute="bottom" constant="733" id="C3z-UO-zM0"/>
+                            <constraint firstItem="wop-AH-e2K" firstAttribute="leading" secondItem="6t9-uY-X6E" secondAttribute="leading" id="OFU-5u-2yZ"/>
+                            <constraint firstItem="oJi-vc-Bw6" firstAttribute="leading" secondItem="6t9-uY-X6E" secondAttribute="leading" id="PTX-05-eJj"/>
+                            <constraint firstItem="oJi-vc-Bw6" firstAttribute="top" secondItem="5S6-gd-mgo" secondAttribute="top" id="ZDJ-e9-chO"/>
+                            <constraint firstItem="wop-AH-e2K" firstAttribute="top" secondItem="6t9-uY-X6E" secondAttribute="top" constant="45" id="dYc-bX-kKV"/>
+                            <constraint firstItem="wop-AH-e2K" firstAttribute="trailing" secondItem="6t9-uY-X6E" secondAttribute="trailing" id="iI9-TI-etc"/>
+                            <constraint firstItem="oJi-vc-Bw6" firstAttribute="trailing" secondItem="6t9-uY-X6E" secondAttribute="trailing" id="wFV-ZE-15s"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6t9-uY-X6E"/>
+                    </view>
+                    <connections>
+                        <outlet property="locationsMapView" destination="oJi-vc-Bw6" id="hXf-G1-A1b"/>
+                        <outlet property="locationsSearchbarController" destination="wop-AH-e2K" id="4I5-K4-6kS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bg4-GS-t1u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer scale="3" id="sJB-P1-O1r">
+                    <connections>
+                        <action selector="zoomIN:" destination="hyX-wc-JC7" id="cDL-XE-nx6"/>
+                    </connections>
+                </pinchGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="117.39130434782609" y="-19.419642857142858"/>
+        </scene>
+    </scenes>
+</document>

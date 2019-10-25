@@ -11,7 +11,35 @@ import UIKit
 class TopStaysCollectionViewCell: UICollectionViewCell {
   
 //    features
-//    MARK: - private
+//    MARK: - Outlets
+    
+    
     @IBOutlet weak var featuredImageView: UIImageView!
-    @IBOutlet weak var featuredImageLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var titleOfListing: UILabel!
+    @IBOutlet weak var costOfListing: UILabel!
+    @IBOutlet weak var justaStarLAbel: UILabel!
+    @IBOutlet weak var countofStars: UILabel!
+    
+//    MARK : cell initializer
+    
+//    var propertyViews: _? {
+//    didSet{
+//    updateViews()
+//    }
+//    }
+    
+//    MARK: - UpdateViews Method
+    
+//    func updateViews() {
+//
+//        guard let propertyDetails = propertyDetails else { return }
+//        locationLabel.text = propertyDetails.location
+//        titleOfListing.text = propertyDetails.title
+//        costOfListing.text = propertyDetails.price
+//        countofStars.text = propertyDetails.starsCount
+//    }
+    
+    
+    
 }

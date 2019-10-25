@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 enum LoginType {
     
@@ -43,6 +44,9 @@ class LoginViewController: UIViewController {
     var loginType = LoginType.signUp
     let cateogorytext:  UIPickerView = UIPickerView()
     let inputChoices: [Category] = [.Owner, .Renter]
+    let layer = CAGradientLayer()
+    
+//    MARK: - View Cyle
     
     
     override func viewDidLoad() {
@@ -50,6 +54,7 @@ class LoginViewController: UIViewController {
         areYouCateogorytextField.inputView = cateogorytext
         cateogorytext.delegate = self as? UIPickerViewDelegate
         cateogorytext.dataSource = self as? UIPickerViewDataSource
+       
         
         
 
@@ -67,13 +72,16 @@ class LoginViewController: UIViewController {
             lastNameTextField.isHidden = false
             areYouCateogorytextField.isHidden = false
             usernameTextField.isHidden = false
+            emailTextField.isHidden = false
         } else {
             loginType = .signIn
             signInButton.setTitle("Sign In", for: .normal)
             firstNameTextField.isHidden = true
             lastNameTextField.isHidden = true
             areYouCateogorytextField.isHidden = true
-            usernameTextField.isHidden = true
+            usernameTextField.isHidden = false
+            emailTextField.isHidden = true
+            
         }
         
     }
@@ -91,21 +99,12 @@ class LoginViewController: UIViewController {
         
         
     }
-    
-    
-    
-    
 
-    /*
-    // MARK: - Navigation
+// MARK: - Methods
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+   
 }
+// MARK: - Extensions
 
 extension LoginViewController: UIPickerViewDataSource {
     
@@ -122,6 +121,9 @@ extension LoginViewController: UIPickerViewDataSource {
     }
     
 }
+
+
+
 
 extension LoginViewController: UIPickerViewDelegate {
     
