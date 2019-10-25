@@ -133,10 +133,12 @@ class APIController {
     
     // MARK: - Networking-PUT User
     func putUser(userRep: UserRepresentation, completion: @escaping (NetworkError?) -> Void) {
+        guard let bearer = bearer else { return }
         let requestURL = baseURL.appendingPathExtension("json")
         
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.put.rawValue
+        request.addValue("Bearer: \(bearer.token)", forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { (data, _, error) in
             if let error = error {
