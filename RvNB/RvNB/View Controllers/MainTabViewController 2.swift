@@ -9,8 +9,9 @@
 import UIKit
 
 class MainTabViewController: UIViewController {
+    
 
-//    MARK: Outlets
+//    MARK: OUTLETS
     
     @IBOutlet weak var rvnbSearchBar: UISearchBar!
     @IBOutlet weak var rvnbImage: UIImageView!
@@ -21,24 +22,10 @@ class MainTabViewController: UIViewController {
     
     
 // MARK: View Life Cycle
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-//        transitions to login view if conditions require
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        APIController.shared.loadFromPersistentStore()
-        if Bearer.shared == nil {
-            performSegue(withIdentifier: "LoginTestSegue", sender: self)
-        } else {
-            print("\(Bearer.shared)")
-            APIController.shared.getAllProperties()
-        }
     }
     
     private struct StoryBoard {
@@ -63,10 +50,7 @@ extension MainTabViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? TopStaysCollectionViewCell else { return UICollectionViewCell() }
-        
-        return cell
-        
+        return (collectionView.cellForItem(at: indexPath) ?? nil)!
     }
     
     
@@ -75,7 +59,7 @@ extension MainTabViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemIndexPath indexPath: NSIndexPath) ->  UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StoryBoard.CellIdentifier, for: indexPath as IndexPath)
         
         return cell
     }

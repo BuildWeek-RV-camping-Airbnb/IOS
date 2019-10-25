@@ -114,7 +114,7 @@
                         <outlet property="logoimageView" destination="4q1-5T-J6k" id="HMW-u3-kDo"/>
                         <outlet property="passwordTextField" destination="S7Q-82-SsV" id="SiT-0u-mut"/>
                         <outlet property="signInButton" destination="anH-6j-8Tl" id="b9s-Lh-EpU"/>
-                        <outlet property="usernameTextField" destination="bZW-3j-9G7" id="7bH-tW-TGu"/>
+                        <outlet property="usernameTextField" destination="bZW-3j-9G7" id="1Wq-Cb-hRC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lvk-eh-Lns" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

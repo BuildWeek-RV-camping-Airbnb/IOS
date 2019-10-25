@@ -31,6 +31,7 @@ enum HTTPMethod: String {
 
 class APIController {
     // MARK: - Class Properties
+    static var shared = APIController()
     let baseURL = URL(string: "https://bw-rvnb.herokuapp.com")!
     var bearer: Bearer?
     var bearerTokenURL: URL? {
@@ -43,7 +44,7 @@ class APIController {
     var amenities: [AmenityRepresentation] = []
     var listings: [ListingRepresentation] = []
     
-    func createUser(firstName: String?, lastName: String?, email: String?, username: String, password: String, owner: Bool, avatar: URL?) -> UserRepresentation {
+    @discardableResult func createUser(firstName: String?, lastName: String?, email: String?, username: String, password: String, owner: Bool, avatar: URL?) -> UserRepresentation {
         
         let newUserRepresentation = UserRepresentation(firstName: firstName, lastName: lastName, email: email, username: username, password: password, owner: owner, avatar: avatar)
         
@@ -52,19 +53,17 @@ class APIController {
     }
     
     // MARK: - Networking-Login
-    func signUpLogIn(firstName: String?, lastName: String?, email: String?, username: String, password: String, owner: Bool, avatar: URL?, completion: @escaping (NetworkError?) -> Void = { _ in }) {
+    func login(username: String, password: String, completion: @escaping (NetworkError?) -> Void = { _ in }) {
         let requestURL = baseURL
             .appendingPathComponent("api")
             .appendingPathComponent("users")
             .appendingPathComponent("login")
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.post.rawValue
-        request.setValue("application/json", forHTTPHeaderField: "Content-type")
-        let newUserRep = createUser(firstName: firstName, lastName: lastName, email: email, username: username, password: password, owner: owner, avatar: avatar)
-        self.user = newUserRep
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let userParameters: [String : String] = [
-            "email" : email!,
+            "username" : username,
             "password" : password
         ]
         
@@ -97,8 +96,8 @@ class APIController {
             }
             
             do {
-                self.bearer = try JSONDecoder().decode(Bearer.self, from: data)
-                self.user?.id = try JSONDecoder().decode(Int.self, from: data)
+                Bearer.shared = try JSONDecoder().decode(Bearer.self, from: data)
+                APIController.shared.saveTokenToPersistentStore()
             } catch {
                 NSLog("Error receiving token OR User ID from backend: \(error)")
             }
@@ -173,11 +172,11 @@ class APIController {
     
     // MARK: - Network-GET all Properties
     func getAllProperties(completion: @escaping (NetworkError?) -> Void = { _ in }) {
-        guard let bearer = bearer else { return }
+//        guard let bearer = bearer else { return }
         let requestURL = baseURL.appendingPathComponent("api").appendingPathComponent("properties")
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.get.rawValue
-        request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(Bearer.shared.token)", forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { (data, _, error) in
             if let error = error {
@@ -271,7 +270,7 @@ class APIController {
         guard let url = bearerTokenURL else { return }
         
         do {
-            let bearerTokenData = try PropertyListEncoder().encode(self.bearer)
+            let bearerTokenData = try PropertyListEncoder().encode(Bearer.shared)
             try bearerTokenData.write(to: url)
         } catch {
             NSLog("Error storing bearer TOKEN data on line \(#line) in \(#file): \(error)")

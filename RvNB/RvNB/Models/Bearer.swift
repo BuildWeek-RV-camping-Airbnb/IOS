@@ -9,5 +9,6 @@
 import Foundation
 
 struct Bearer: Codable {
-    var token: String
+    var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+    static var shared = Bearer()
 }
