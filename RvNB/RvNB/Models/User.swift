@@ -22,4 +22,5 @@ struct UserRepresentation: Codable {
     var password: String
     var owner: Bool
     var avatar: URL?
+    var token: String?
 }

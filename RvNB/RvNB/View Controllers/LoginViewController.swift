@@ -15,11 +15,6 @@ enum LoginType {
     case signIn
 }
 
-struct User: Codable {
-    let email: String
-    let password: String
-}
-
 enum Category: String, Codable {
     case Renter
     case Owner
@@ -52,11 +47,17 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         areYouCateogorytextField.inputView = cateogorytext
+<<<<<<< HEAD
+        cateogorytext.delegate = self as UIPickerViewDelegate
+        cateogorytext.dataSource = self as UIPickerViewDataSource
+=======
         cateogorytext.delegate = self as? UIPickerViewDelegate
         cateogorytext.dataSource = self as? UIPickerViewDataSource
        
         
+>>>>>>> daniBlackwell3
         
+        createToolbar()
 
         // Do any additional setup after loading the view.
     }
@@ -79,26 +80,85 @@ class LoginViewController: UIViewController {
             firstNameTextField.isHidden = true
             lastNameTextField.isHidden = true
             areYouCateogorytextField.isHidden = true
+<<<<<<< HEAD
+            emailTextField.isHidden = true
+=======
             usernameTextField.isHidden = false
             emailTextField.isHidden = true
             
+>>>>>>> daniBlackwell3
         }
         
     }
     
     @IBAction func signUpButtonTapped(_ sender: Any) {
         
-        guard let email = emailTextField.text,
-            let password = passwordTextField.text,
-            let categoryText = areYouCateogorytextField.text,
-            let category = Category(rawValue: categoryText),
-        email != "",
-            !password.isEmpty else { return }
+        if loginSegmentedController.selectedSegmentIndex == 0 {
+            if let firstName = firstNameTextField.text,
+                !firstName.isEmpty,
+                let lastName = lastNameTextField.text,
+                !lastName.isEmpty,
+                let email = emailTextField.text,
+                let username = usernameTextField.text,
+                !username.isEmpty,
+                let password = passwordTextField.text,
+                let categoryText = areYouCateogorytextField.text,
+                let category = Category(rawValue: categoryText),
+                email != "",
+                !password.isEmpty {
+                APIController.shared.createUser(firstName: firstName, lastName: lastName, email: email, username: username, password: password, owner: false, avatar: nil)
+                let alert = UIAlertController(title: "Great! 😎", message: "Now please sign in!", preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alert.addAction(alertAction)
+                present(alert, animated: true, completion: nil)
+                
+                loginSegmentedController.selectedSegmentIndex = 1
+                signInSegChanged(loginSegmentedController!)
+            } else {
+                let alert = UIAlertController(title: "Oops!", message: "Please fill out all the fields in order to sign up", preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alert.addAction(alertAction)
+                present(alert, animated: true, completion: nil)
+            }
+        } else {
+            if let username = usernameTextField.text,
+                let password = passwordTextField.text,
+                !username.isEmpty,
+                !password.isEmpty {
+                APIController.shared.login(username: username, password: password)
+                navigationController?.popViewController(animated: true)
+            } else {
+                let alert = UIAlertController(title: "Sorry! 😬", message: "Username and password fields must be filled out to log in", preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alert.addAction(alertAction)
+                present(alert, animated: true, completion: nil)
+            }
+        }
         
-        let user = User(email: email, password: password)
+//        let user = User(email: email, password: password)
         
         
     }
+<<<<<<< HEAD
+    
+    
+    func createToolbar() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(LoginViewController.dismissKeyboard))
+        toolbar.setItems([doneButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        areYouCateogorytextField.inputAccessoryView = toolbar
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+=======
+>>>>>>> daniBlackwell3
 
 // MARK: - Methods
 

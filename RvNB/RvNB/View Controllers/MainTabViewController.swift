@@ -10,10 +10,13 @@ import UIKit
 import CoreData
 
 class MainTabViewController: UIViewController {
+<<<<<<< HEAD
+=======
     
     var bearer: Bearer?
     var apiController: APIController?
     
+>>>>>>> daniBlackwell3
 
 //    MARK: Outlets
     
@@ -30,21 +33,33 @@ class MainTabViewController: UIViewController {
         super.viewDidAppear(animated)
 
 //        transitions to login view if conditions require
-        if bearer == nil {
-            performSegue(withIdentifier: "LoginTestSegue", sender: self)
-        }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+<<<<<<< HEAD
+        APIController.shared.loadFromPersistentStore()
+        if Bearer.shared == nil {
+            performSegue(withIdentifier: "LoginTestSegue", sender: self)
+        } else {
+            print("\(Bearer.shared)")
+            APIController.shared.getAllProperties()
+        }
+    }
+    
+    private struct StoryBoard {
+        static let CellIdentifier = "Cell"
+=======
         
         topRatedStays.delegate = self as? UICollectionViewDelegate
         topRatedStays.dataSource = self as? UICollectionViewDataSource
         listOfStays.delegate = self as? UICollectionViewDelegate
         listOfStays.dataSource = self as? UICollectionViewDataSource
         
+>>>>>>> daniBlackwell3
     }
 
     /*
