@@ -228,4 +228,36 @@ class APIController {
             completion(nil)
         }.resume()
     }
+    
+    // MARK: Network-GET all Listings
+    func getAllListings(completion: @escaping (NetworkError?) -> Void = { _ in }) {
+        guard let bearer = bearer else { return }
+        let requestURL = baseURL.appendingPathComponent("api").appendingPathComponent("listings")
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.get.rawValue
+        request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                NSLog("Error GETting listings from backend on \(#line) in \(#file): \(error)")
+                completion(.getRequestError)
+                return
+            }
+            
+            guard let data = data else {
+                NSLog("Error unwrapping listing data on line \(#line) in \(#file)")
+                completion(.badData)
+                return
+            }
+            
+            do {
+                self.listings = try JSONDecoder().decode([ListingRepresentation].self, from: data)
+            } catch {
+                NSLog("Error decoding listings on line \(#line) in \(#file): \(error)")
+                completion(.noDecode)
+                return
+            }
+            completion(nil)
+        }.resume()
+    }
 }
