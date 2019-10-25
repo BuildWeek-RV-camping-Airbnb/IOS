@@ -30,8 +30,14 @@ enum HTTPMethod: String {
 }
 
 class APIController {
+    // MARK: - Class Properties
     let baseURL = URL(string: "https://bw-rvnb.herokuapp.com")!
     var bearer: Bearer?
+    var bearerTokenURL: URL? {
+        let fm = FileManager.default
+        guard let documents = fm.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
+        return documents.appendingPathComponent("Bearer.plist")
+    }
     var user: UserRepresentation?
     var properties: [PropertyRepresentation] = []
     var amenities: [AmenityRepresentation] = []
