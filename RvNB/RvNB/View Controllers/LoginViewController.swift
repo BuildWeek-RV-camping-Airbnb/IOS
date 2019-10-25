@@ -14,11 +14,6 @@ enum LoginType {
     case signIn
 }
 
-struct User: Codable {
-    let email: String
-    let password: String
-}
-
 enum Category: String, Codable {
     case Renter
     case Owner
@@ -87,7 +82,7 @@ class LoginViewController: UIViewController {
         email != "",
             !password.isEmpty else { return }
         
-        let user = User(email: email, password: password)
+//        let user = User(email: email, password: password)
         
         
     }

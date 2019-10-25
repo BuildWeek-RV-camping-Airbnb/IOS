@@ -134,7 +134,7 @@ class APIController {
     }
     
     // MARK: - Networking-PUT User
-    func put(userRep: UserRepresentation, completion: @escaping (NetworkError?) -> Void) {
+    func putUser(userRep: UserRepresentation, completion: @escaping (NetworkError?) -> Void) {
         let requestURL = baseURL.appendingPathExtension("json")
         
         var request = URLRequest(url: requestURL)
