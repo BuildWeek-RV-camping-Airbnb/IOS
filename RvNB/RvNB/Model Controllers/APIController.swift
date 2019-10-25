@@ -266,4 +266,26 @@ class APIController {
             completion(nil)
         }.resume()
     }
+    
+    func saveTokenToPersistentStore() {
+        guard let url = bearerTokenURL else { return }
+        
+        do {
+            let bearerTokenData = try PropertyListEncoder().encode(self.bearer)
+            try bearerTokenData.write(to: url)
+        } catch {
+            NSLog("Error storing bearer TOKEN data on line \(#line) in \(#file): \(error)")
+        }
+    }
+    
+    func loadFromPersistentStore() {
+        guard let url = bearerTokenURL else { return }
+        
+        do {
+            let data = try Data(contentsOf: url)
+            self.bearer = try PropertyListDecoder().decode(Bearer.self, from: data)
+        } catch {
+            NSLog("Error loading Bearer Token From Store")
+        }
+    }
 }
