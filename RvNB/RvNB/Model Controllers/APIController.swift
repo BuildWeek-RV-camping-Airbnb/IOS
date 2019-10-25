@@ -33,6 +33,9 @@ class APIController {
     let baseURL = URL(string: "https://bw-rvnb.herokuapp.com")!
     var bearer: Bearer?
     var user: UserRepresentation?
+    var properties: [PropertyRepresentation] = []
+    var amenities: [AmenityRepresentation] = []
+    var listings: [ListingRepresentation] = []
     
     func createUser(firstName: String?, lastName: String?, email: String?, username: String, password: String, owner: Bool, avatar: URL?) -> UserRepresentation {
         
@@ -97,11 +100,6 @@ class APIController {
         }.resume()
     }
     
-    // MARK: - Networking-GET User
-    func getUser(email: String, completion: @escaping (NetworkError?) -> Void = { _ in }) {
-        
-    }
-    
     // MARK: - Networking-POST User
     func postNewUser(userRep: UserRepresentation, completion: @escaping (NetworkError?) -> Void = { _ in }) {
         let requestURL = baseURL.appendingPathComponent("api").appendingPathComponent("users")
@@ -164,4 +162,6 @@ class APIController {
             completion(.none)
         }.resume()
     }
+    
+    
 }
