@@ -30,9 +30,18 @@ enum HTTPMethod: String {
 }
 
 class APIController {
+    // MARK: - Class Properties
     let baseURL = URL(string: "https://bw-rvnb.herokuapp.com")!
     var bearer: Bearer?
+    var bearerTokenURL: URL? {
+        let fm = FileManager.default
+        guard let documents = fm.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
+        return documents.appendingPathComponent("Bearer.plist")
+    }
     var user: UserRepresentation?
+    var properties: [PropertyRepresentation] = []
+    var amenities: [AmenityRepresentation] = []
+    var listings: [ListingRepresentation] = []
     
     func createUser(firstName: String?, lastName: String?, email: String?, username: String, password: String, owner: Bool, avatar: URL?) -> UserRepresentation {
         
@@ -97,11 +106,6 @@ class APIController {
         }.resume()
     }
     
-    // MARK: - Networking-GET User
-    func getUser(email: String, completion: @escaping (NetworkError?) -> Void = { _ in }) {
-        
-    }
-    
     // MARK: - Networking-POST User
     func postNewUser(userRep: UserRepresentation, completion: @escaping (NetworkError?) -> Void = { _ in }) {
         let requestURL = baseURL.appendingPathComponent("api").appendingPathComponent("users")
@@ -134,11 +138,13 @@ class APIController {
     }
     
     // MARK: - Networking-PUT User
-    func put(userRep: UserRepresentation, completion: @escaping (NetworkError?) -> Void) {
+    func putUser(userRep: UserRepresentation, completion: @escaping (NetworkError?) -> Void) {
+        guard let bearer = bearer else { return }
         let requestURL = baseURL.appendingPathExtension("json")
         
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.put.rawValue
+        request.addValue("Bearer: \(bearer.token)", forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { (data, _, error) in
             if let error = error {
@@ -163,5 +169,123 @@ class APIController {
             
             completion(.none)
         }.resume()
+    }
+    
+    // MARK: - Network-GET all Properties
+    func getAllProperties(completion: @escaping (NetworkError?) -> Void = { _ in }) {
+        guard let bearer = bearer else { return }
+        let requestURL = baseURL.appendingPathComponent("api").appendingPathComponent("properties")
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.get.rawValue
+        request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                NSLog("Error GETting properties on line \(#line) in \(#file): \(error)")
+                completion(.getRequestError)
+                return
+            }
+            
+            guard let data = data else {
+                NSLog("Error getting properties data on line \(#line) in \(#file)")
+                completion(.badData)
+                return
+            }
+            
+            do {
+                self.properties = try JSONDecoder().decode([PropertyRepresentation].self, from: data)
+            } catch {
+                NSLog("Error decoding properties data on line \(#line) in \(#file): \(error)")
+                completion(.noDecode)
+                return
+            }
+            completion(nil)
+        }.resume()
+    }
+    
+    // MARK: - Network-GET all Amenities
+    func getAllAmenities(completion: @escaping (NetworkError?) -> Void = { _ in }) {
+        guard let bearer = bearer else { return }
+        let requestURL = baseURL.appendingPathComponent("api").appendingPathComponent("amenities")
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.get.rawValue
+        request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                NSLog("Error GETting amenities from backend on line \(#line) in \(#file): \(error)")
+                completion(.getRequestError)
+                return
+            }
+            
+            guard let data = data else {
+                NSLog("Error unwrapping amenity data on line \(#line) in \(#file)")
+                completion(.badData)
+                return
+            }
+            
+            do {
+                self.amenities = try JSONDecoder().decode([AmenityRepresentation].self, from: data)
+            } catch {
+                NSLog("Error decoding amenities on line \(#line) in \(#file): \(error)")
+                completion(.noDecode)
+                return
+            }
+            completion(nil)
+        }.resume()
+    }
+    
+    // MARK: Network-GET all Listings
+    func getAllListings(completion: @escaping (NetworkError?) -> Void = { _ in }) {
+        guard let bearer = bearer else { return }
+        let requestURL = baseURL.appendingPathComponent("api").appendingPathComponent("listings")
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.get.rawValue
+        request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                NSLog("Error GETting listings from backend on \(#line) in \(#file): \(error)")
+                completion(.getRequestError)
+                return
+            }
+            
+            guard let data = data else {
+                NSLog("Error unwrapping listing data on line \(#line) in \(#file)")
+                completion(.badData)
+                return
+            }
+            
+            do {
+                self.listings = try JSONDecoder().decode([ListingRepresentation].self, from: data)
+            } catch {
+                NSLog("Error decoding listings on line \(#line) in \(#file): \(error)")
+                completion(.noDecode)
+                return
+            }
+            completion(nil)
+        }.resume()
+    }
+    
+    func saveTokenToPersistentStore() {
+        guard let url = bearerTokenURL else { return }
+        
+        do {
+            let bearerTokenData = try PropertyListEncoder().encode(self.bearer)
+            try bearerTokenData.write(to: url)
+        } catch {
+            NSLog("Error storing bearer TOKEN data on line \(#line) in \(#file): \(error)")
+        }
+    }
+    
+    func loadFromPersistentStore() {
+        guard let url = bearerTokenURL else { return }
+        
+        do {
+            let data = try Data(contentsOf: url)
+            self.bearer = try PropertyListDecoder().decode(Bearer.self, from: data)
+        } catch {
+            NSLog("Error loading Bearer Token From Store")
+        }
     }
 }
