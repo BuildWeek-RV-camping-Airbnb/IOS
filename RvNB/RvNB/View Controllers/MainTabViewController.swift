@@ -7,8 +7,16 @@
 //
 
 import UIKit
+import CoreData
 
 class MainTabViewController: UIViewController {
+<<<<<<< HEAD
+=======
+    
+    var bearer: Bearer?
+    var apiController: APIController?
+    
+>>>>>>> daniBlackwell3
 
 //    MARK: Outlets
     
@@ -23,7 +31,7 @@ class MainTabViewController: UIViewController {
 // MARK: View Life Cycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
 //        transitions to login view if conditions require
         
     }
@@ -32,6 +40,7 @@ class MainTabViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+<<<<<<< HEAD
         APIController.shared.loadFromPersistentStore()
         if Bearer.shared == nil {
             performSegue(withIdentifier: "LoginTestSegue", sender: self)
@@ -43,6 +52,14 @@ class MainTabViewController: UIViewController {
     
     private struct StoryBoard {
         static let CellIdentifier = "Cell"
+=======
+        
+        topRatedStays.delegate = self as? UICollectionViewDelegate
+        topRatedStays.dataSource = self as? UICollectionViewDataSource
+        listOfStays.delegate = self as? UICollectionViewDelegate
+        listOfStays.dataSource = self as? UICollectionViewDataSource
+        
+>>>>>>> daniBlackwell3
     }
 
     /*
@@ -59,25 +76,36 @@ class MainTabViewController: UIViewController {
 
 extension MainTabViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 10
     }
     
+//     set up for both collectionviews
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? TopStaysCollectionViewCell else { return UICollectionViewCell() }
+        
+        if collectionView == self.topRatedStays {
+            let cell: TopStaysCollectionViewCell = (collectionView.dequeueReusableCell(withReuseIdentifier: "topRatedStaysCell", for: indexPath) as? TopStaysCollectionViewCell)!
+            
+//            cell.imageView.image = UIImage(named: places[indexPath.row])
+            
+            return cell
+        }
+        
+        else{
+        
+            let cell: ListOfStaysCollectionViewCell =
+            (collectionView.dequeueReusableCell(withReuseIdentifier: "StaysCell", for: indexPath) as? ListOfStaysCollectionViewCell)!
+            
+//            cell.imageView.image = UIImage(named: places[indexPath.row])
         
         return cell
-        
     }
     
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 2
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemIndexPath indexPath: NSIndexPath) ->  UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath)
-        
-        return cell
-    }
-    
+}
+
 }

@@ -102,7 +102,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceHorizontal="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5Kt-tf-E8c">
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5Kt-tf-E8c">
                                                         <rect key="frame" x="0.0" y="264.66666666666669" width="382" height="128"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6Qe-ua-ElY">
@@ -112,7 +112,7 @@
                                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         </collectionViewFlowLayout>
                                                         <cells>
-                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="Cell" id="AOC-QY-QEk" customClass="TopStaysCollectionViewCell" customModule="RvNB" customModuleProvider="target">
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="topRatedStaysCell" id="AOC-QY-QEk" customClass="TopStaysCollectionViewCell" customModule="RvNB" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.66666666666666663" width="120" height="127"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="RWd-we-R9c">
@@ -171,19 +171,24 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
+                                                                    <outlet property="costOfListing" destination="A3S-lb-hnT" id="hda-6W-hkB"/>
+                                                                    <outlet property="countofStars" destination="dT1-Fp-67v" id="0EI-G0-gR0"/>
                                                                     <outlet property="featuredImageView" destination="Qc7-bO-e0Q" id="aCX-Qn-xl1"/>
+                                                                    <outlet property="justaStarLAbel" destination="heN-t2-nzV" id="R2d-Mh-GI5"/>
+                                                                    <outlet property="locationLabel" destination="WYt-bp-aoD" id="W56-pS-hmI"/>
+                                                                    <outlet property="titleOfListing" destination="gUf-d8-AGm" id="fBs-Vr-LnH"/>
                                                                     <segue destination="XaV-Ja-fsz" kind="show" id="5AV-jG-WsR"/>
                                                                 </connections>
                                                             </collectionViewCell>
                                                         </cells>
                                                     </collectionView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="# Of Stays" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Td5-ou-ucm">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# Of Stays" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Td5-ou-ucm">
                                                         <rect key="frame" x="0.0" y="400.66666666666663" width="79.666666666666671" height="20.333333333333314"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gbE-fE-syF">
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gbE-fE-syF">
                                                         <rect key="frame" x="0.0" y="429" width="382" height="416"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Eqd-fX-G6x">
@@ -193,7 +198,7 @@
                                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         </collectionViewFlowLayout>
                                                         <cells>
-                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StayCell" id="cdW-hC-SHL">
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StaysCell" id="cdW-hC-SHL" customClass="ListOfStaysCollectionViewCell" customModule="RvNB" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="119" height="126"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="m2r-7t-hhj">
@@ -251,10 +256,21 @@
                                                                         <integer key="value" value="20"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <outlet property="justAStar" destination="jws-OE-dqa" id="Zfb-l3-Jh8"/>
+                                                                    <outlet property="locationImage" destination="UmB-HL-YSU" id="geR-N3-wWw"/>
+                                                                    <outlet property="locationName" destination="iv2-5C-MEG" id="BWk-Ln-pfF"/>
+                                                                    <outlet property="nightlyCost" destination="3Ix-x0-f6w" id="KYz-1h-oBe"/>
+                                                                    <outlet property="starCount" destination="dMD-uj-7p7" id="7Ih-ia-WIg"/>
+                                                                    <outlet property="viewOfListingLabel" destination="FZA-T2-CCz" id="TBv-RB-sbJ"/>
+                                                                </connections>
                                                             </collectionViewCell>
                                                         </cells>
                                                     </collectionView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="Td5-ou-ucm" firstAttribute="top" secondItem="4k0-HC-QBp" secondAttribute="top" constant="400.66666666666663" id="GYZ-HJ-Zrb"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

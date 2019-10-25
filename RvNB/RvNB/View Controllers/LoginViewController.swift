@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 enum LoginType {
     
@@ -38,13 +39,23 @@ class LoginViewController: UIViewController {
     var loginType = LoginType.signUp
     let cateogorytext:  UIPickerView = UIPickerView()
     let inputChoices: [Category] = [.Owner, .Renter]
+    let layer = CAGradientLayer()
+    
+//    MARK: - View Cyle
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         areYouCateogorytextField.inputView = cateogorytext
+<<<<<<< HEAD
         cateogorytext.delegate = self as UIPickerViewDelegate
         cateogorytext.dataSource = self as UIPickerViewDataSource
+=======
+        cateogorytext.delegate = self as? UIPickerViewDelegate
+        cateogorytext.dataSource = self as? UIPickerViewDataSource
+       
+        
+>>>>>>> daniBlackwell3
         
         createToolbar()
 
@@ -69,7 +80,13 @@ class LoginViewController: UIViewController {
             firstNameTextField.isHidden = true
             lastNameTextField.isHidden = true
             areYouCateogorytextField.isHidden = true
+<<<<<<< HEAD
             emailTextField.isHidden = true
+=======
+            usernameTextField.isHidden = false
+            emailTextField.isHidden = true
+            
+>>>>>>> daniBlackwell3
         }
         
     }
@@ -122,6 +139,7 @@ class LoginViewController: UIViewController {
         
         
     }
+<<<<<<< HEAD
     
     
     func createToolbar() {
@@ -139,17 +157,14 @@ class LoginViewController: UIViewController {
         view.endEditing(true)
     }
     
+=======
+>>>>>>> daniBlackwell3
 
-    /*
-    // MARK: - Navigation
+// MARK: - Methods
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+   
 }
+// MARK: - Extensions
 
 extension LoginViewController: UIPickerViewDataSource {
     
@@ -166,6 +181,9 @@ extension LoginViewController: UIPickerViewDataSource {
     }
     
 }
+
+
+
 
 extension LoginViewController: UIPickerViewDelegate {
     
